@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
 import android.view.SurfaceView;
+import android.view.View;
 
 public class GameView extends SurfaceView implements Callback {
 	private Bitmap bm;
@@ -22,9 +23,10 @@ public class GameView extends SurfaceView implements Callback {
 	}
 
 	@Override
-	public void draw(Canvas canvas) {
+	protected void onDraw(Canvas canvas) {
 		canvas.drawColor(Color.BLACK);
 		canvas.drawBitmap(bm, 10, 10, null);
+
 	}
 
 	@Override
@@ -35,7 +37,7 @@ public class GameView extends SurfaceView implements Callback {
 	@Override
 	public void surfaceCreated(SurfaceHolder holder) {
 		Canvas c = holder.lockCanvas();
-		draw(c);
+		onDraw(c);
 		holder.unlockCanvasAndPost(c);
 	}
 
