@@ -8,14 +8,16 @@ import android.graphics.Color;
 import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
 import android.view.SurfaceView;
-import android.view.View;
 
 public class GameView extends SurfaceView implements Callback {
 	private Bitmap bm;
 	private SurfaceHolder holder;
+	private GameThread gameThread;
+	private int x = 0;
 
 	public GameView(Context context) {
 		super(context);
+		gameThread = new GameThread(this);
 		holder = getHolder();
 		holder.addCallback(this);
 		bm = BitmapFactory.decodeResource(getResources(),
@@ -25,6 +27,9 @@ public class GameView extends SurfaceView implements Callback {
 	@Override
 	public void draw(Canvas canvas) {
 		canvas.drawColor(Color.BLACK);
+		if (x < getWidth() - bm.getWidth()) {
+			x++;
+		}
 		canvas.drawBitmap(bm, 10, 10, null);
 	}
 
@@ -35,9 +40,12 @@ public class GameView extends SurfaceView implements Callback {
 
 	@Override
 	public void surfaceCreated(SurfaceHolder holder) {
-		Canvas c = holder.lockCanvas();
-		draw(c);
-		holder.unlockCanvasAndPost(c);
+		gameThread.setRunning(true);
+		gameThread.start();
+		// Canvas c = holder.lockCanvas();
+		// draw(c);
+		// holder.unlockCanvasAndPost(c);
+
 	}
 
 	@Override
