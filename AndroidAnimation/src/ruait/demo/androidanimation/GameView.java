@@ -5,11 +5,13 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
 import android.view.SurfaceView;
 
 public class GameView extends SurfaceView implements Callback {
+	private static final String TAG = GameView.class.getSimpleName();
 	private Bitmap bm;
 	private SurfaceHolder holder;
 	private GameThread gameThread;
@@ -30,6 +32,7 @@ public class GameView extends SurfaceView implements Callback {
 		if (x < getWidth() - bm.getWidth()) {
 			x++;
 		}
+		Log.d(TAG, "Moving to " + x);
 		canvas.drawBitmap(bm, x, 10, null);
 	}
 
