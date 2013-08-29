@@ -20,7 +20,8 @@ public class GameView extends SurfaceView implements Callback {
 		gameThread = new GameThread(this);
 		holder = getHolder();
 		holder.addCallback(this);
-
+		bm = BitmapFactory.decodeResource(getResources(),
+				R.drawable.ic_launcher);
 	}
 
 	@Override
@@ -29,14 +30,13 @@ public class GameView extends SurfaceView implements Callback {
 		if (x < getWidth() - bm.getWidth()) {
 			x++;
 		}
-		canvas.drawBitmap(bm, 10, 10, null);
+		canvas.drawBitmap(bm, x, 10, null);
 	}
 
 	@Override
 	public void surfaceChanged(SurfaceHolder holder, int format, int width,
 			int height) {
-		bm = BitmapFactory.decodeResource(getResources(),
-				R.drawable.ic_launcher);
+
 	}
 
 	@Override
