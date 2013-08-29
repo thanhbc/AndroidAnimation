@@ -23,10 +23,9 @@ public class GameView extends SurfaceView implements Callback {
 	}
 
 	@Override
-	protected void onDraw(Canvas canvas) {
+	public void draw(Canvas canvas) {
 		canvas.drawColor(Color.BLACK);
 		canvas.drawBitmap(bm, 10, 10, null);
-
 	}
 
 	@Override
@@ -37,7 +36,7 @@ public class GameView extends SurfaceView implements Callback {
 	@Override
 	public void surfaceCreated(SurfaceHolder holder) {
 		Canvas c = holder.lockCanvas();
-		onDraw(c);
+		draw(c);
 		holder.unlockCanvasAndPost(c);
 	}
 
