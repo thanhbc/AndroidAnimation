@@ -16,6 +16,7 @@ public class GameView extends SurfaceView implements Callback {
 	private SurfaceHolder holder;
 	private GameThread gameThread;
 	private int x = 0;
+	private int xSpeed = 1;
 
 	public GameView(Context context) {
 		super(context);
@@ -29,9 +30,13 @@ public class GameView extends SurfaceView implements Callback {
 	@Override
 	public void draw(Canvas canvas) {
 		canvas.drawColor(Color.BLACK);
-		if (x < getWidth() - bm.getWidth()) {
-			x++;
+		if (x == getWidth() - bm.getWidth()) {
+			xSpeed = -1;
 		}
+		if (x == 0) {
+			xSpeed = 1;
+		}
+		x = x + xSpeed;
 		Log.d(TAG, "Moving to " + x);
 		canvas.drawBitmap(bm, x, 10, null);
 	}
